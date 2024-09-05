@@ -1,0 +1,28 @@
+{
+  "name": "mmm-swh",
+  "version": "1.0.0",
+  "description": "Module for MagicMirror² to show images from the SWH website.",
+  "main": "MMM-SWH.js",
+  "scripts": {
+    "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
+    "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
+    "test": "npm run lint"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cheerio": "^1.0.0",
+    "jsdom": "^25.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.9.1",
+    "@stylistic/eslint-plugin": "^2.7.2",
+    "eslint": "^9.9.1",
+    "globals": "^15.9.0",
+    "markdownlint-cli": "^0.41.0",
+    "prettier": "^3.3.3",
+    "stylelint": "^16.9.0",
+    "stylelint-config-standard": "^36.0.1",
+    "stylelint-prettier": "^5.0.2"
+  }
+}
