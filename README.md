@@ -1,6 +1,8 @@
 # MMM-SWH
 
-**MMM-SWH** is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to display advertising images from the website <www.swh.de>.
+**MMM-SWH** is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) to display advertising images from the websites of SWH or its daughter companies.
+
+*Disclaimer*: Before using this module, you must ensure that you are authorised to use the content from SWH (or one of its daughter companies) on your device.
 
 ## Installation
 
