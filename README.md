@@ -64,5 +64,5 @@ Pull requests are of course also very welcome 🙂
 
 ## To Do
 
-* NETZ HALLE
-* Maya Mare
+- NETZ HALLE
+- Maya Mare
