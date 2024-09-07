@@ -1,6 +1,6 @@
-const globals = require("globals");
-const {configs: eslintConfigs} = require("@eslint/js");
-const eslintPluginStylistic = require("@stylistic/eslint-plugin");
+import eslintPluginJs from "@eslint/js";
+import eslintPluginStylistic from "@stylistic/eslint-plugin";
+import globals from "globals";
 
 const config = [
   {
@@ -15,8 +15,17 @@ const config = [
       ...eslintPluginStylistic.configs["all-flat"].plugins
     },
     rules: {
-      ...eslintConfigs.all.rules,
+      ...eslintPluginJs.configs.all.rules,
       ...eslintPluginStylistic.configs["all-flat"].rules,
+      "@stylistic/array-element-newline": ["error", "consistent"],
+      "@stylistic/dot-location": ["error", "property"],
+      "@stylistic/function-call-argument-newline": ["error", "consistent"],
+      "@stylistic/indent": ["error", 2],
+      "@stylistic/lines-around-comment": "off",
+      "@stylistic/multiline-comment-style": "off",
+      "@stylistic/object-property-newline": "off",
+      "@stylistic/padded-blocks": ["error", "never"],
+      "@stylistic/quote-props": ["error", "as-needed"],
       "capitalized-comments": "off",
       "consistent-this": "off",
       "default-case": "off",
@@ -31,21 +40,12 @@ const config = [
       "no-await-in-loop": "off",
       "no-inline-comments": "off",
       "no-magic-numbers": "off",
-      "no-undefined": "off",
       "no-ternary": "off",
+      "no-undefined": "off",
       "one-var": "off",
       "prefer-destructuring": "off",
       "sort-keys": "off",
-      strict: "off",
-      "@stylistic/array-element-newline": ["error", "consistent"],
-      "@stylistic/dot-location": ["error", "property"],
-      "@stylistic/function-call-argument-newline": ["error", "consistent"],
-      "@stylistic/indent": ["error", 2],
-      "@stylistic/lines-around-comment": "off",
-      "@stylistic/multiline-comment-style": "off",
-      "@stylistic/object-property-newline": "off",
-      "@stylistic/quote-props": ["error", "as-needed"],
-      "@stylistic/padded-blocks": ["error", "never"]
+      strict: "off"
     }
   },
   {
@@ -60,13 +60,15 @@ const config = [
       ...eslintPluginStylistic.configs["all-flat"].plugins
     },
     rules: {
-      ...eslintConfigs.all.rules,
+      ...eslintPluginJs.configs.all.rules,
       ...eslintPluginStylistic.configs["all-flat"].rules,
-      "func-style": "off",
-      "max-lines-per-function": ["error", 100],
+      "@stylistic/array-element-newline": "off",
+      "@stylistic/function-call-argument-newline": ["error", "consistent"],
+      "@stylistic/indent": ["error", 2],
+      "@stylistic/padded-blocks": ["error", "never"],
+      "@stylistic/quote-props": ["error", "as-needed"],
       "no-magic-numbers": "off",
-      "one-var": "off",
-      "prefer-destructuring": "off"
+      "one-var": "off"
     }
   }
 ];
@@ -88,4 +90,4 @@ if (debug === true) {
   });
 }
 
-module.exports = config;
+export default config;
