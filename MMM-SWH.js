@@ -6,9 +6,10 @@ Module.register("MMM-SWH", {
     slideInterval: 15 * 1000,
     url: "https://swh.de",
     shortUrl: "www.swh.de",
-    maxUrlLength: 50,
+    maxUrlLength: 45,
     header: "MMM-SWH",
-    showHeader: false
+    showHeader: false,
+    animationSpeed: 1_500 // Refresh animation speed in milliseconds
   },
 
   start () {
@@ -39,8 +40,12 @@ Module.register("MMM-SWH", {
   socketNotificationReceived (notification, payload) {
     if (notification === "SLIDESHOW_DATA") {
       if (payload.identifier === this.identifier) {
+        if (payload.objects.length === 1) {
+          this.config.animationSpeed = 0;
+        }
+
         this.images = payload.objects;
-        this.updateDom();
+        this.updateDom(this.config.animationSpeed);
         this.startSlideshow();
       }
     }
@@ -50,7 +55,7 @@ Module.register("MMM-SWH", {
     if (this.images.length > 0) {
       setInterval(() => {
         this.currentIndex = (this.currentIndex + 1) % this.images.length;
-        this.updateDom();
+        this.updateDom(this.config.animationSpeed);
       }, this.config.slideInterval);
     }
   },

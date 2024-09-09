@@ -39,6 +39,7 @@ These are the possible options:
 | `maxUrlLength`    | Maximal URL length. If a URL is shorter the `shortUrl` will be used. Default: `50` (characters).                   |
 | `header`          | Interval (in milliseconds) to get the images from the website. Default: `60 * 60 * 1000` (1 hour).                 |
 | `showHeader`      | Show header (`true`) or not (`false`). Default: `true`.                                                            |
+| `animationSpeed`  | Speed of the update animation.<br>**Possible values:** `0` - `5000`<br>**Default value:** `2000`<br>**Unit:** `milliseconds`|
 <!-- prettier-ignore-end -->
 
 Here is an example for an entry in `config.js`

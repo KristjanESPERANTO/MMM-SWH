@@ -1,5 +1,6 @@
 // MagicMirror²-Konfiguration
 
+// eslint-disable-next-line prefer-const
 let config = {
   address: "127.0.0.1",
   port: 8080,
