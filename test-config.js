@@ -1,5 +1,6 @@
 // MagicMirror²-Konfiguration
-const config = {
+
+let config = {
   address: "127.0.0.1",
   port: 8080,
   basePath: "/",
@@ -108,11 +109,11 @@ const config = {
       }
     },
     {
-      disabled: true,
+      disabled: false,
       module: "MMM-SWH",
       position: "top_left",
       config: {
-        header: "Maya Mare",
+        header: "Maya mare",
         slideInterval: 26000,
         url: "https://www.mayamare.de",
         shortUrl: "www.mayamare.de",

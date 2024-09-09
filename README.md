@@ -67,4 +67,4 @@ Pull requests are of course also very welcome 🙂
 ## To Do
 
 - NETZ HALLE
-- Maya Mare
+- Simplify configuration by selecting a company rather than entering every detail.

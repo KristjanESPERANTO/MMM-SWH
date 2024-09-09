@@ -15,6 +15,9 @@ module.exports = NodeHelper.create({
         identifier.push(payload.identifier);
         this.fetchSlideshowData(payload);
       }
+    } else if (notification === "GET_MAIN_IMAGE") {
+      identifier.push(payload.identifier);
+      this.fetchMainImage(payload);
     }
   },
 
@@ -24,8 +27,7 @@ module.exports = NodeHelper.create({
       const response = await fetch(url);
       const body = await response.text();
       const dom = new JSDOM(body);
-
-      const {document} = dom.window;
+      const document = dom.window.document;
       const objects = [];
       const imgElements = document.getElementsByClassName("slider-box");
 
@@ -72,6 +74,40 @@ module.exports = NodeHelper.create({
       this.sendSocketNotification("SLIDESHOW_DATA", result);
     } catch (error) {
       Log.error("Error fetching slideshow data:", error);
+    }
+  },
+
+  async fetchMainImage (payload) {
+    try {
+      const url = payload.url;
+      const response = await fetch(url);
+      const body = await response.text();
+      const dom = new JSDOM(body);
+      const document = dom.window.document;
+      const objects = [];
+      const imgElements = document.getElementsByClassName("et_pb_image_0");
+
+      if (imgElements.length > 0) {
+        Array.from(imgElements).forEach((imgContainer) => {
+          const object = {};
+          const img = imgContainer.querySelector("img");
+
+          object.src = img.src;
+
+          if (object.src.startsWith("http")) {
+            object.url = payload.shortUrl;
+            objects.push(object);
+          }
+        });
+
+        const result = {};
+        result.identifier = payload.identifier;
+        result.objects = objects;
+
+        this.sendSocketNotification("SLIDESHOW_DATA", result);
+      }
+    } catch (error) {
+      Log.error("Error fetching image:", error);
     }
   }
 });

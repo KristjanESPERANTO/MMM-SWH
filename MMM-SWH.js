@@ -29,7 +29,11 @@ Module.register("MMM-SWH", {
       shortUrl: this.config.shortUrl,
       maxUrlLength: this.config.maxUrlLength
     };
-    this.sendSocketNotification("GET_SLIDESHOW_DATA", options);
+    if (this.config.header === "Maya mare") {
+      this.sendSocketNotification("GET_MAIN_IMAGE", options);
+    } else {
+      this.sendSocketNotification("GET_SLIDESHOW_DATA", options);
+    }
   },
 
   socketNotificationReceived (notification, payload) {
