@@ -37,7 +37,7 @@ module.exports = NodeHelper.create({
         const urla = imgContainer.querySelector("a");
 
         object.src = img.getAttribute("data-lazy") || img.src;
-        object.url = urla.getAttribute("href");
+        object.url = urla ? urla.getAttribute("href") : payload.shortUrl;
 
         if (object.src.startsWith("/")) {
           object.src = url + object.src;
@@ -47,7 +47,7 @@ module.exports = NodeHelper.create({
           object.url = url + object.url;
         }
 
-        if (!object.url.startsWith("http")) {
+        if (!object.url.startsWith("http") && !object.url.startsWith("www")) {
           object.url = `${url}/${object.url}`;
         }
 

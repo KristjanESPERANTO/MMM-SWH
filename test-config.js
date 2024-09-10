@@ -18,11 +18,8 @@ let config = {
       module: "MMM-SWH",
       position: "top_left",
       config: {
-        header: "HAVAG",
-        slideInterval: 10000,
-        url: "https://havag.com",
-        shortUrl: "www.havag.com",
-        showHeader: true
+        company: "bäder",
+        slideInterval: 10000
       }
     },
     {
@@ -30,11 +27,8 @@ let config = {
       module: "MMM-SWH",
       position: "top_left",
       config: {
-        header: "SWH",
-        slideInterval: 12000,
-        url: "https://swh.de",
-        shortUrl: "www.swh.de",
-        showHeader: true
+        company: "evh",
+        slideInterval: 11250
       }
     },
     {
@@ -42,10 +36,43 @@ let config = {
       module: "MMM-SWH",
       position: "top_left",
       config: {
-        header: "EVH",
-        slideInterval: 14000,
-        url: "https://evh.de",
-        shortUrl: "www.evh.de",
+        company: "hafen",
+        slideInterval: 12500
+      }
+    },
+    {
+      disabled: false,
+      module: "MMM-SWH",
+      position: "top_center",
+      config: {
+        company: "havag",
+        slideInterval: 13750
+      }
+    },
+    {
+      disabled: false,
+      module: "MMM-SWH",
+      position: "top_center",
+      config: {
+        company: "hws",
+        slideInterval: 15000
+      }
+    },
+    {
+      disabled: false,
+      module: "MMM-SWH",
+      position: "top_center",
+      config: {
+        company: "ITC",
+        slideInterval: 16250
+      }
+    },
+    {
+      disabled: false,
+      module: "MMM-SWH",
+      position: "top_right",
+      config: {
+        company: "maya mare",
         showHeader: true
       }
     },
@@ -54,11 +81,8 @@ let config = {
       module: "MMM-SWH",
       position: "top_right",
       config: {
-        header: "HWS",
-        slideInterval: 16000,
-        url: "https://hws-halle.de",
-        shortUrl: "www.hws-halle.de",
-        showHeader: true
+        company: "netz halle",
+        slideInterval: 17250
       }
     },
     {
@@ -66,59 +90,8 @@ let config = {
       module: "MMM-SWH",
       position: "top_right",
       config: {
-        header: "ITC",
-        slideInterval: 18000,
-        url: "https://itc-halle.de",
-        shortUrl: "www.itc-halle.de",
-        showHeader: true
-      }
-    },
-    {
-      disabled: false,
-      module: "MMM-SWH",
-      position: "top_right",
-      config: {
-        header: "Hafen",
-        slideInterval: 20000,
-        url: "https://ct-hs.de",
-        shortUrl: "www.ct-hs.de",
-        showHeader: true
-      }
-    },
-    {
-      disabled: false,
-      module: "MMM-SWH",
-      position: "top_right",
-      config: {
-        header: "Bäder",
-        slideInterval: 22000,
-        url: "https://baden-in-halle.de",
-        shortUrl: "baden-in-halle.de",
-        showHeader: true
-      }
-    },
-    {
-      disabled: true,
-      module: "MMM-SWH",
-      position: "top_right",
-      config: {
-        header: "NETZ HALLE",
-        slideInterval: 24000,
-        url: "https://netzhalle.de",
-        shortUrl: "www.netzhalle.de",
-        showHeader: true
-      }
-    },
-    {
-      disabled: false,
-      module: "MMM-SWH",
-      position: "top_left",
-      config: {
-        header: "Maya mare",
-        slideInterval: 26000,
-        url: "https://www.mayamare.de",
-        shortUrl: "www.mayamare.de",
-        showHeader: true
+        company: "swh",
+        slideInterval: 18500
       }
     }
   ]
