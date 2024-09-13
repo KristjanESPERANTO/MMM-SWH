@@ -8,7 +8,7 @@
     "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
     "test": "npm run lint"
   },
-  "author": "",
+  "author": "Kristjan ESPERANTO",
   "license": "ISC",
   "dependencies": {
     "cheerio": "^1.0.0",
@@ -24,5 +24,17 @@
     "stylelint": "^16.9.0",
     "stylelint-config-standard": "^36.0.1",
     "stylelint-prettier": "^5.0.2"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KristjanESPERANTO/MMM-SWH.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "SWH"
+  ],
+  "bugs": {
+    "url": "https://github.com/KristjanESPERANTO/MMM-SWH/issues"
+  },
+  "homepage": "https://github.com/KristjanESPERANTO/MMM-SWH#readme"
 }
