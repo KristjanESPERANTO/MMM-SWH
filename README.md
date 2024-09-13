@@ -20,7 +20,7 @@ npm ci
 Go to the module’s folder inside MagicMirror modules folder and pull the latest version from GitHub and install:
 
 ```bash
-cd ~/MagicMirror/modules/MMM-MMM-SWH
+cd ~/MagicMirror/modules/MMM-SWH
 git pull
 npm ci
 ```
