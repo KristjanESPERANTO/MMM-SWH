@@ -92,7 +92,7 @@ module.exports = NodeHelper.create({
           const object = {};
           const img = imgContainer.querySelector("img");
 
-          object.src = img.src;
+          object.src = img.getAttribute("data-lazy") || img.getAttribute("data-lazy-src") || img.src;
 
           if (object.src.startsWith("http")) {
             object.url = payload.shortUrl;
