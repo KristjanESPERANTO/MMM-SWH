@@ -1,5 +1,4 @@
 const config = {
-  trailingComma: "none",
   overrides: [
     {
       files: "*.md",
@@ -7,7 +6,9 @@ const config = {
         parser: "markdown"
       }
     }
-  ]
+  ],
+  trailingComma: "none"
 };
 
-module.exports = config;
+export default config;
+
