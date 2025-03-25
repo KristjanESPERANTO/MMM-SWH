@@ -80,6 +80,8 @@ Module.register("MMM-SWH", {
     };
     if (this.header === "Maya mare") {
       this.sendSocketNotification("GET_MAIN_IMAGE", options);
+    } else if (this.header === "Bäder Halle") {
+      this.sendSocketNotification("GET_NEW_SLIDESHOW_DATA", options);
     } else {
       this.sendSocketNotification("GET_SLIDESHOW_DATA", options);
     }
