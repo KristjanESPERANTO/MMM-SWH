@@ -4,8 +4,8 @@
   "description": "Module for MagicMirror² to show images from the SWH website.",
   "main": "MMM-SWH.js",
   "scripts": {
-    "lint": "eslint . && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
-    "lint:fix": "eslint . --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
+    "lint": "eslint && stylelint **/*.css && markdownlint . --ignore node_modules && prettier . --check",
+    "lint:fix": "eslint --fix && stylelint **/*.css --fix && markdownlint . --ignore node_modules --fix && prettier . --write",
     "test": "npm run lint"
   },
   "author": "Kristjan ESPERANTO",
