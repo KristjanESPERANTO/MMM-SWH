@@ -4,6 +4,12 @@
 
 _Disclaimer_: Before using this module, you must ensure that you are authorised to use the content from SWH (or one of its daughter companies) on your device.
 
+## Screenshot
+
+Blurred screenshot of the module with all companies:
+
+![Screenshot](screenshot.png)
+
 ## Installation
 
 Just clone the module into your modules folder of your MagicMirror² and execute `npm ci` in the module’s directory:
