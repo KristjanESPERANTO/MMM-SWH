@@ -1,8 +1,12 @@
+import eslintPluginImport from "eslint-plugin-import-x";
 import eslintPluginJs from "@eslint/js";
 import eslintPluginStylistic from "@stylistic/eslint-plugin";
 import globals from "globals";
 
 const config = [
+  eslintPluginImport.flatConfigs.recommended,
+  eslintPluginJs.configs.all,
+  eslintPluginStylistic.configs.all,
   {
     files: ["**/*.js"],
     languageOptions: {
@@ -11,12 +15,7 @@ const config = [
         ...globals.node
       }
     },
-    plugins: {
-      ...eslintPluginStylistic.configs["all-flat"].plugins
-    },
     rules: {
-      ...eslintPluginJs.configs.all.rules,
-      ...eslintPluginStylistic.configs["all-flat"].rules,
       "@stylistic/array-element-newline": ["error", "consistent"],
       "@stylistic/dot-location": ["error", "property"],
       "@stylistic/function-call-argument-newline": ["error", "consistent"],
@@ -53,17 +52,13 @@ const config = [
   {
     files: ["**/*.mjs"],
     languageOptions: {
+      ecmaVersion: "latest",
       globals: {
         ...globals.node
       },
       sourceType: "module"
     },
-    plugins: {
-      ...eslintPluginStylistic.configs["all-flat"].plugins
-    },
     rules: {
-      ...eslintPluginJs.configs.all.rules,
-      ...eslintPluginStylistic.configs["all-flat"].rules,
       "@stylistic/array-element-newline": "off",
       "@stylistic/function-call-argument-newline": ["error", "consistent"],
       "@stylistic/indent": ["error", 2],
@@ -74,22 +69,5 @@ const config = [
     }
   }
 ];
-
-/*
- * Set debug to true for testing purposes.
- * Since some plugins have not yet been optimized for the flat config,
- * we will be able to optimize this file in the future. It can be helpful
- * to write the ESLint config to a file and compare it after changes.
- */
-const debug = false;
-
-if (debug === true) {
-  const FileSystem = require("node:fs");
-  FileSystem.writeFile("eslint-config-DEBUG.json", JSON.stringify(config, null, 2), (error) => {
-    if (error) {
-      throw error;
-    }
-  });
-}
 
 export default config;

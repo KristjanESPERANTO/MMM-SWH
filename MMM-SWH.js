@@ -7,7 +7,7 @@ Module.register("MMM-SWH", {
     maxUrlLength: 45,
     showHeader: true,
     showMoreInfo: true,
-    animationSpeed: 1_500 // Refresh animation speed in milliseconds
+    animationSpeed: 1500 // Refresh animation speed in milliseconds
   },
 
   start () {
