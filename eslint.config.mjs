@@ -1,20 +1,32 @@
-import eslintPluginImport from "eslint-plugin-import-x";
-import eslintPluginJs from "@eslint/js";
-import eslintPluginStylistic from "@stylistic/eslint-plugin";
+import css from "@eslint/css";
+import {defineConfig} from "eslint/config";
 import globals from "globals";
+import {flatConfigs as importX} from "eslint-plugin-import-x";
+import js from "@eslint/js";
+import stylistic from "@stylistic/eslint-plugin";
 
-const config = [
-  eslintPluginImport.flatConfigs.recommended,
-  eslintPluginJs.configs.all,
-  eslintPluginStylistic.configs.all,
+export default defineConfig([
   {
-    files: ["**/*.js"],
+    files: ["**/*.css"],
+    language: "css/css",
+    languageOptions: {tolerant: true},
+    plugins: {css},
+    extends: ["css/recommended"],
+    rules: {
+      "css/use-baseline": ["error", {available: "newly"}]
+    }
+  },
+  {
+    files: ["**/*.js", "**/*.mjs"],
     languageOptions: {
+      ecmaVersion: "latest",
       globals: {
         ...globals.browser,
         ...globals.node
       }
     },
+    plugins: {js, stylistic},
+    extends: [importX.recommended, "js/all", "stylistic/all"],
     rules: {
       "@stylistic/array-element-newline": ["error", "consistent"],
       "@stylistic/dot-location": ["error", "property"],
@@ -23,7 +35,8 @@ const config = [
       "@stylistic/lines-around-comment": "off",
       "@stylistic/multiline-comment-style": "off",
       "@stylistic/multiline-ternary": "off",
-      "@stylistic/object-property-newline": "off",
+      "@stylistic/no-multi-spaces": ["error", {ignoreEOLComments: true}],
+      "@stylistic/object-property-newline": ["error", {allowAllPropertiesOnSameLine: true}],
       "@stylistic/padded-blocks": ["error", "never"],
       "@stylistic/quote-props": ["error", "as-needed"],
       "capitalized-comments": "off",
@@ -31,6 +44,7 @@ const config = [
       "consistent-this": "off",
       "default-case": "off",
       "func-style": "off",
+      "import-x/no-unresolved": ["error", {ignore: ["eslint/config", "node_helper", "logger"]}],
       "init-declarations": "off",
       "line-comment-position": "off",
       "max-lines": "off",
@@ -48,26 +62,5 @@ const config = [
       "sort-keys": "off",
       strict: "off"
     }
-  },
-  {
-    files: ["**/*.mjs"],
-    languageOptions: {
-      ecmaVersion: "latest",
-      globals: {
-        ...globals.node
-      },
-      sourceType: "module"
-    },
-    rules: {
-      "@stylistic/array-element-newline": "off",
-      "@stylistic/function-call-argument-newline": ["error", "consistent"],
-      "@stylistic/indent": ["error", 2],
-      "@stylistic/padded-blocks": ["error", "never"],
-      "@stylistic/quote-props": ["error", "as-needed"],
-      "no-magic-numbers": "off",
-      "one-var": "off"
-    }
   }
-];
-
-export default config;
+]);
