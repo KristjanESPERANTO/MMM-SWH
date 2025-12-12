@@ -1,6 +1,6 @@
 {
   "name": "mmm-swh",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Module for MagicMirror² to show images from the SWH website.",
   "main": "MMM-SWH.js",
   "scripts": {
