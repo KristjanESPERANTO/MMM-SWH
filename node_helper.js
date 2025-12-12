@@ -34,25 +34,29 @@ module.exports = NodeHelper.create({
       const dom = new JSDOM(body);
       const document = dom.window.document;
       const objects = [];
-      const imgElements = document.getElementsByClassName("slider-box");
+      let imgElements = document.getElementsByClassName("slider-box");
+      // fallback: some pages use 'carousel-item' markup (bootstrap-like sliders)
+      if (imgElements.length === 0) {
+        imgElements = document.getElementsByClassName("carousel-item");
+      }
 
       Array.from(imgElements).forEach((imgContainer) => {
         const object = {};
         const img = imgContainer.querySelector("img");
         const urla = imgContainer.querySelector("a");
 
-        object.src = img.getAttribute("data-lazy") || img.src;
+        object.src = img && (img.getAttribute("data-lazy") || img.getAttribute("data-lazy-src") || img.src);
         object.url = urla ? urla.getAttribute("href") : payload.shortUrl;
 
-        if (object.src.startsWith("/")) {
+        if (object.src && object.src.startsWith("/")) {
           object.src = url + object.src;
         }
 
-        if (object.url.startsWith("/")) {
+        if (object.url && object.url.startsWith("/")) {
           object.url = url + object.url;
         }
 
-        if (!object.url.startsWith("http") && !object.url.startsWith("www")) {
+        if (object.url && !object.url.startsWith("http") && !object.url.startsWith("www")) {
           object.url = `${url}/${object.url}`;
         }
 
@@ -60,22 +64,26 @@ module.exports = NodeHelper.create({
           object.url = object.url.slice(0, -1);
         }
 
-        if (object.url.length > payload.maxUrlLength) {
-          Log.debug(`URL ${object.url} is to long. Use default URL instead.`);
+        if (!object.url) {
           object.url = payload.shortUrl;
         }
 
-        if (object.src !== undefined && object.url !== undefined) {
+        if (object.url.length > payload.maxUrlLength) {
+          Log.debug(`URL ${object.url} is too long. Use default URL instead.`);
+          object.url = payload.shortUrl;
+        }
+
+        if (object.src && object.url) {
           objects.push(object);
         }
       });
 
-      Log.debug(objects);
+      Log.debug(`Fetched slides from ${url} -> ${objects.length} items`, objects);
 
       const result = {};
       result.identifier = payload.identifier;
       result.objects = objects;
-
+      Log.debug(`Sending SLIDESHOW_DATA for ${payload.identifier} (${url}) with ${objects.length} items`);
       this.sendSocketNotification("SLIDESHOW_DATA", result);
     } catch (error) {
       Log.error("Error fetching slideshow data:", error);
@@ -90,7 +98,11 @@ module.exports = NodeHelper.create({
       const dom = new JSDOM(body);
       const document = dom.window.document;
       const objects = [];
-      const imgElements = document.getElementsByClassName("carousel-item");
+      let imgElements = document.getElementsByClassName("carousel-item");
+      // fallback to old slider markup if no carousel items are found
+      if (imgElements.length === 0) {
+        imgElements = document.getElementsByClassName("slider-box");
+      }
 
       Array.from(imgElements).forEach((imgContainer) => {
         if (imgContainer.classList.contains("h-100")) {
@@ -103,42 +115,46 @@ module.exports = NodeHelper.create({
         if (img) {
           const urla = imgContainer.querySelector("a");
 
-          object.src = img.src;
+          object.src = img && (img.getAttribute("data-lazy") || img.getAttribute("data-lazy-src") || img.src);
           object.url = urla ? urla.getAttribute("href") : payload.shortUrl;
 
-          if (object.src.startsWith("/")) {
+          if (object.src && object.src.startsWith("/")) {
             object.src = url + object.src;
           }
 
-          if (object.url.startsWith("/")) {
+          if (object.url && object.url.startsWith("/")) {
             object.url = url + object.url;
           }
 
-          if (!object.url.startsWith("http") && !object.url.startsWith("www")) {
+          if (object.url && !object.url.startsWith("http") && !object.url.startsWith("www")) {
             object.url = `${url}/${object.url}`;
           }
 
-          if (object.url.endsWith("/")) {
+          if (object.url && object.url.endsWith("/")) {
             object.url = object.url.slice(0, -1);
           }
 
-          if (object.url.length > payload.maxUrlLength) {
-            Log.debug(`URL ${object.url} is to long. Use default URL instead.`);
+          if (!object.url) {
             object.url = payload.shortUrl;
           }
 
-          if (object.src !== undefined && object.url !== undefined) {
+          if (object.url.length > payload.maxUrlLength) {
+            Log.debug(`URL ${object.url} is too long. Use default URL instead.`);
+            object.url = payload.shortUrl;
+          }
+
+          if (object.src && object.url) {
             objects.push(object);
           }
         }
       });
 
-      Log.debug(objects);
+      Log.debug(`Fetched new slideshow from ${url} -> ${objects.length} items`, objects);
 
       const result = {};
       result.identifier = payload.identifier;
       result.objects = objects;
-
+      Log.debug(`Sending SLIDESHOW_DATA for ${payload.identifier} (${url}) with ${objects.length} items`);
       this.sendSocketNotification("SLIDESHOW_DATA", result);
     } catch (error) {
       Log.error("Error fetching slideshow data:", error);
@@ -160,9 +176,13 @@ module.exports = NodeHelper.create({
           const object = {};
           const img = imgContainer.querySelector("img");
 
+          if (!img) {
+            return;
+          }
+
           object.src = img.getAttribute("data-lazy") || img.getAttribute("data-lazy-src") || img.src;
 
-          if (object.src.startsWith("http")) {
+          if (object.src && object.src.startsWith("http")) {
             object.url = payload.shortUrl;
             objects.push(object);
           }
@@ -172,6 +192,7 @@ module.exports = NodeHelper.create({
         result.identifier = payload.identifier;
         result.objects = objects;
 
+        Log.debug(`Sending SLIDESHOW_DATA (main image) for ${payload.identifier} (${url}) with ${objects.length} items`);
         this.sendSocketNotification("SLIDESHOW_DATA", result);
       }
     } catch (error) {
