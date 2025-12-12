@@ -1,5 +1,17 @@
 /* global Log Module*/
 
+const companies = {
+  bäder: {shortUrl: "www.baden-in-halle.de", url: "https://baden-in-halle.de", header: "Bäder Halle"},
+  evh: {shortUrl: "www.evh.de", url: "https://evh.de", header: "Energieversorgung Halle"},
+  hafen: {shortUrl: "www.ct-hs.de", url: "https://ct-hs.de", header: "Container Terminal Halle (Saale)"},
+  havag: {shortUrl: "www.havag.com", url: "https://havag.com", header: "Hallesche Verkehrs-AG"},
+  hws: {shortUrl: "www.hws-halle.de", url: "https://hws-halle.de", header: "Hallesche Wasser und Stadtwirtschaft"},
+  itc: {shortUrl: "www.itc-halle.de", url: "https://itc-halle.de", header: "IT-Consult Halle"},
+  "maya mare": {shortUrl: "www.mayamare.de", url: "https://mayamare.de", header: "Maya mare"},
+  "netz halle": {shortUrl: "www.netzhalle.de", url: "https://netzhalle.de", header: "NETZ HALLE"},
+  swh: {shortUrl: "www.swh.de", url: "https://swh.de", header: "Stadtwerke Halle"}
+};
+
 Module.register("MMM-SWH", {
   defaults: {
     updateInterval: 60 * 60 * 1000,
@@ -12,55 +24,12 @@ Module.register("MMM-SWH", {
 
   start () {
     Log.info(`Starting module: ${this.name} with identifier: ${this.identifier}`);
-    this.config.company = this.config.company.toLowerCase();
-    switch (this.config.company) {
-      case "bäder":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.baden-in-halle.de";
-        this.url = this.config.url ? this.config.url : "https://baden-in-halle.de";
-        this.header = this.config.header ? this.config.header : "Bäder Halle";
-        break;
-      case "evh":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.evh.de";
-        this.url = this.config.url ? this.config.url : "https://evh.de";
-        this.header = this.config.header ? this.config.header : "Energieversorgung Halle";
-        break;
-      case "hafen":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.ct-hs.de";
-        this.url = this.config.url ? this.config.url : "https://ct-hs.de";
-        this.header = this.config.header ? this.config.header : "Container Terminal Halle (Saale)";
-        break;
-      case "havag":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.havag.com";
-        this.url = this.config.url ? this.config.url : "https://havag.com";
-        this.header = this.config.header ? this.config.header : "Hallesche Verkehrs-AG";
-        break;
-      case "hws":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.hws-halle.de";
-        this.url = this.config.url ? this.config.url : "https://hws-halle.de";
-        this.header = this.config.header ? this.config.header : "Hallesche Wasser und Stadtwirtschaft";
-        break;
-      case "itc":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.itc-halle.de";
-        this.url = this.config.url ? this.config.url : "https://itc-halle.de";
-        this.header = this.config.header ? this.config.header : "IT-Consult Halle";
-        break;
-      case "maya mare":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.mayamare.de";
-        this.url = this.config.url ? this.config.url : "https://mayamare.de";
-        this.header = this.config.header ? this.config.header : "Maya mare";
-        break;
-      case "netz halle":
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.netzhalle.de";
-        this.url = this.config.url ? this.config.url : "https://netzhalle.de";
-        this.header = this.config.header ? this.config.header : "NETZ HALLE";
-        break;
-      default:
-        this.company = "swh";
-        this.shortUrl = this.config.shortUrl ? this.config.shortUrl : "www.swh.de";
-        this.url = this.config.url ? this.config.url : "https://swh.de";
-        this.header = this.config.header ? this.config.header : "Stadtwerke Halle";
-        break;
-    }
+    const companyKey = this.config.company?.toLowerCase() || "swh";
+    const companyData = companies[companyKey] || companies.swh;
+
+    this.shortUrl = this.config.shortUrl || companyData.shortUrl;
+    this.url = this.config.url || companyData.url;
+    this.header = this.config.header || companyData.header;
 
     this.images = [];
     this.currentIndex = 0;
