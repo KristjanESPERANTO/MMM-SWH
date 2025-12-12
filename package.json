@@ -7,7 +7,17 @@
     "check-sites": "node scripts/check_sites.js",
     "lint": "eslint && prettier . --check",
     "lint:fix": "eslint --fix && prettier . --write",
+    "prepare": "simple-git-hooks",
     "test": "npm run lint"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
+  },
+  "lint-staged": {
+    "*": [
+      "eslint --fix",
+      "prettier --write --ignore-unknown"
+    ]
   },
   "author": "Kristjan ESPERANTO",
   "license": "ISC",
@@ -23,7 +33,9 @@
     "eslint": "^9.39.1",
     "eslint-plugin-import-x": "^4.16.1",
     "globals": "^16.5.0",
-    "prettier": "^3.7.4"
+    "lint-staged": "^16.2.7",
+    "prettier": "^3.7.4",
+    "simple-git-hooks": "^2.13.1"
   },
   "repository": {
     "type": "git",
