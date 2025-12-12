@@ -93,7 +93,7 @@ Module.register("MMM-SWH", {
         this.images = payload.objects;
         this.updateDom(this.config.animationSpeed);
 
-        if (this.images.length > 1) {
+        if (this.images.length > 1 && !this.slideshowInterval) {
           this.startSlideshow();
         }
       }
@@ -101,7 +101,7 @@ Module.register("MMM-SWH", {
   },
 
   startSlideshow () {
-    setInterval(() => {
+    this.slideshowInterval = setInterval(() => {
       this.currentIndex = (this.currentIndex + 1) % this.images.length;
       this.updateDom(this.config.animationSpeed);
     }, this.config.slideInterval);
