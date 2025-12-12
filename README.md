@@ -62,3 +62,13 @@ Here is a minimal example for an entry in your `config.js`:
 If you find any problems, bugs or have questions, please [open a GitHub issue](https://github.com/KristjanESPERANTO/MMM-SWH/issues) in this repository.
 
 Pull requests are very welcome 🙂
+
+## Troubleshooting
+
+If images are not loading for a specific company, you can check if the website structure has changed by running:
+
+```bash
+npm run check-sites
+```
+
+This script checks all supported websites and shows which HTML patterns are detected. If a site shows "KEINS GEFUNDEN" (none found), the website structure may have changed and the module needs to be updated.
