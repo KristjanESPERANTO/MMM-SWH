@@ -8,6 +8,7 @@
     "lint": "eslint && prettier . --check",
     "lint:fix": "eslint --fix && prettier . --write",
     "prepare": "simple-git-hooks",
+    "start": "MM_CONFIG_FILE=modules/MMM-SWH/test-config.js npm start --prefix ~/MagicMirror",
     "test": "npm run lint"
   },
   "simple-git-hooks": {

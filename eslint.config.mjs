@@ -65,6 +65,12 @@ export default defineConfig([
     }
   },
   {
+    files: ["test-config.js"],
+    rules: {
+      "prefer-const": "off"
+    }
+  },
+  {
     files: ["**/*.md"],
     plugins: {markdown},
     language: "markdown/gfm",

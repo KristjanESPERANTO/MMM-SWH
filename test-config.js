@@ -1,6 +1,4 @@
 // MagicMirror²-Konfiguration
-
-// eslint-disable-next-line prefer-const
 let config = {
   address: "127.0.0.1",
   port: 8080,
@@ -9,7 +7,7 @@ let config = {
   useHttps: false,
   language: "de",
 
-  logLevel: ["INFO", "LOG", "WARN", "ERROR"], // Add "DEBUG" for even more logging
+  logLevel: ["INFO", "LOG", "WARN", "ERROR", "DEBUG"], // Add "DEBUG" for even more logging
   timeFormat: 24,
   units: "metric",
   modules: [
@@ -73,7 +71,8 @@ let config = {
       position: "top_right",
       config: {
         company: "maya mare",
-        showHeader: true
+        showHeader: true,
+        showMoreInfo: true
       }
     },
     {
